@@ -4,7 +4,7 @@ import datetime
 from construct import (Struct, Int8ub, Int16ub, Const, Padded, Byte, Enum, Bytes, If, FlagsEnum,
                        GreedyBytes, Switch, Pass, this, Probe, Default, PascalString, Seek,
                        Embedded, Flag, BytesInteger,
-                       SymmetricMapping, Adapter)
+                       Mapping, Adapter)
 import enum
 
 _LOGGER = logging.getLogger(__name__)
@@ -132,7 +132,7 @@ HourMinuteSecond = "time" / Struct(HourMinuteAdapter(
 Statistics = "stats" / Struct(GreedyBytes)
 
 OnOff = "OnOff" / Struct(
-    "state" / SymmetricMapping(Byte, {True: 0x01, False: 0x02}, default=False)
+    "state" / Mapping(Byte, {True: 0x01, False: 0x02})
 )
 
 RGB = "rgb" / Struct(
